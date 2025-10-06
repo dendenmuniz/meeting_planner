@@ -1,0 +1,24 @@
+ {% extends "base.html" %}
+
+ {% block title %}Welcome{% endblock %}
+
+ {% block content %}
+  <h1>Welcome to the Meeting Planner!</h1>
+  <p>Your one-stop solution for scheduling meetings effortlessly.
+    <em>Django: Getting Started</em> on
+    <a href="https://www.djangoproject.com/start/">Django's official website</a>
+  </p>
+  {% if user.is_authenticated %}
+    <h2>Meetings</h2>
+    <ul>
+      {% for meeting in meetings %}
+        <li>
+          <a href="{% url 'details' meeting.id %}">{{ meeting.title }}</a>
+          - {{ meeting.start_time }} in {{ meeting.room }}
+        </li>
+      {% endfor %}
+    </ul>
+
+    <a href="{% url 'rooms' %}">Rooms list</a>
+  {% endif %}
+{% endblock %}
